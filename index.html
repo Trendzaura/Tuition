@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+o<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -234,7 +234,6 @@ ${
   });
 
   let totalExpected = totalPaid + totalPending;
-  let collectionRate = totalExpected === 0 ? 0 : Math.round((totalPaid / totalExpected) * 100);
 
   document.getElementById("teacherTable").innerHTML = html;
   document.getElementById("totalStudents").innerText = totalStudents;
@@ -244,7 +243,6 @@ ${
   document.getElementById("paidStudents").innerText = paidStudents;
   document.getElementById("unpaidStudents").innerText = unpaidStudents;
   document.getElementById("overpaidStudents").innerText = overpaidStudents;
-  document.getElementById("collectionRate").innerText = collectionRate + "%";
 }
 
 /* ----------- EDIT MONTHLY FEES ----------- */
