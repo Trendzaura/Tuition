@@ -41,14 +41,6 @@ oninput="renderTeacher()"
 style="width:60%;margin-left:20%;margin-bottom:10px;">
   <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:10px;">
 
-  <button onclick="setFilter('all')" style="width:auto;margin:0;padding:6px 12px;">All</button>
-
-  <button onclick="setFilter('paid')" style="width:auto;margin:0;padding:6px 12px;">Paid</button>
-
-  <button onclick="setFilter('unpaid')" style="width:auto;margin:0;padding:6px 12px;">Unpaid</button>
-
-  <button onclick="setFilter('overpaid')" style="width:auto;margin:0;padding:6px 12px;">Overpaid</button>
-
   <button onclick="addStudent()" style="width:auto;margin:0;padding:6px 12px;">Add New Student</button>
 
   <button onclick="publishAll()" style="width:auto;margin:0;padding:6px 12px;">Publish All Students</button>
@@ -70,11 +62,6 @@ style="width:60%;margin-left:20%;margin-bottom:10px;">
     <h3>Total Pending</h3>
     <p id="totalPending">₹0</p>
   </div>
-
-  <div class="box" style="background:#dbeafe;width:180px;">
-  <h3>Collection Rate</h3>
-  <p id="collectionRate">0%</p>
-</div>
 
   <button onclick="setFilter('paid')" style="background:#bbf7d0;width:180px;">
   <h3>Paid Students</h3>
