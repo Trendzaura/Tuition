@@ -34,6 +34,11 @@ textarea{resize:none;}
 <!-- TEACHER DASHBOARD -->
 <div class="box hidden" id="teacherBox">
   <h2>Teacher Dashboard</h2>
+  <input 
+id="searchStudent" 
+placeholder="Search student by name..." 
+oninput="renderTeacher()" 
+style="width:60%;margin-left:20%;margin-bottom:10px;">
   <div id="insights" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:15px;justify-content:center;">
   
   <div class="box" style="background:#e2e8f0;width:180px;">
@@ -55,6 +60,26 @@ textarea{resize:none;}
     <h3>Overpaid</h3>
     <p id="totalOverpaid">₹0</p>
   </div>
+
+  <div class="box" style="background:#bbf7d0;width:180px;">
+  <h3>Paid Students</h3>
+  <p id="paidStudents">0</p>
+</div>
+
+<div class="box" style="background:#fecaca;width:180px;">
+  <h3>Unpaid Students</h3>
+  <p id="unpaidStudents">0</p>
+</div>
+
+<div class="box" style="background:#fed7aa;width:180px;">
+  <h3>Overpaid Students</h3>
+  <p id="overpaidStudents">0</p>
+</div>
+
+<div class="box" style="background:#dbeafe;width:180px;">
+  <h3>Collection Rate</h3>
+  <p id="collectionRate">0%</p>
+</div>
 
 </div>
   <button onclick="addStudent()">Add New Student</button>
@@ -153,15 +178,21 @@ function addStudent(){
 }
 
 function renderTeacher(){
+  const search = document.getElementById("searchStudent")?.value.toLowerCase() || "";
   let totalStudents = 0;
   let totalPaid = 0;
   let totalPending = 0;
   let totalOverpaid = 0;
+  
+  let paidStudents = 0;
+  let unpaidStudents = 0;
+  let overpaidStudents = 0;
   let html = `<tr>
     <th>Name</th><th>Password</th><th>Joining Date</th>
     <th>Montly Fees</th><th>Fees (to be paid)</th><th>Fees (Paid)</th><th>Fees (Remaining)</th><th>Status</th><th>Actions</th></tr>`;
 
   teacherData.students.forEach((s,i)=>{
+    if(!s.name.toLowerCase().includes(search)) return;
     if(!s.history) s.history = [];
 
 const remaining = s.feestobepaid - s.feespaid;
@@ -172,6 +203,9 @@ if(remaining > 0) totalPending += remaining;
 else if(remaining < 0) totalOverpaid += Math.abs(remaining);
 
 totalPaid += s.feespaid;
+if(remaining === 0) paidStudents++;
+else if(remaining > 0) unpaidStudents++;
+else overpaidStudents++;
     html += `<tr>
       <td>${s.name}</td>
       <td>${s.password}</td>
@@ -198,11 +232,18 @@ ${
     </tr>`;
   });
 
+  let totalExpected = totalPaid + totalPending;
+  let collectionRate = totalExpected === 0 ? 0 : Math.round((totalPaid / totalExpected) * 100);
+
   document.getElementById("teacherTable").innerHTML = html;
   document.getElementById("totalStudents").innerText = totalStudents;
   document.getElementById("totalPaid").innerText = "₹" + totalPaid;
   document.getElementById("totalPending").innerText = "₹" + totalPending;
   document.getElementById("totalOverpaid").innerText = "₹" + totalOverpaid;
+  document.getElementById("paidStudents").innerText = paidStudents;
+  document.getElementById("unpaidStudents").innerText = unpaidStudents;
+  document.getElementById("overpaidStudents").innerText = overpaidStudents;
+  document.getElementById("collectionRate").innerText = collectionRate + "%";
 }
 
 /* ----------- EDIT MONTHLY FEES ----------- */
