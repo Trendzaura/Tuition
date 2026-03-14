@@ -39,11 +39,20 @@ id="searchStudent"
 placeholder="Search student by name..." 
 oninput="renderTeacher()" 
 style="width:60%;margin-left:20%;margin-bottom:10px;">
-  <div style="text-align:center;margin-bottom:10px;">
-  <button onclick="setFilter('all')">All</button>
-  <button onclick="setFilter('paid')">Paid</button>
-  <button onclick="setFilter('unpaid')">Unpaid</button>
-  <button onclick="setFilter('overpaid')">Overpaid</button>
+  <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:10px;">
+
+  <button onclick="setFilter('all')" style="width:auto;margin:0;padding:6px 12px;">All</button>
+
+  <button onclick="setFilter('paid')" style="width:auto;margin:0;padding:6px 12px;">Paid</button>
+
+  <button onclick="setFilter('unpaid')" style="width:auto;margin:0;padding:6px 12px;">Unpaid</button>
+
+  <button onclick="setFilter('overpaid')" style="width:auto;margin:0;padding:6px 12px;">Overpaid</button>
+
+  <button onclick="addStudent()" style="width:auto;margin:0;padding:6px 12px;">Add New Student</button>
+
+  <button onclick="publishAll()" style="width:auto;margin:0;padding:6px 12px;">Publish All Students</button>
+
 </div>
   <div id="insights" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:15px;justify-content:center;">
   
@@ -88,8 +97,6 @@ style="width:60%;margin-left:20%;margin-bottom:10px;">
 </div>
 
 </div>
-  <button onclick="addStudent()">Add New Student</button>
-  <button onclick="publishAll()">Publish All Students</button>
   <table id="teacherTable"></table>
 </div>
 
