@@ -6,158 +6,53 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
   *, *::before, *::after { box-sizing: border-box; }
-
-  body {
-    font-family: Arial, sans-serif;
-    background: #564100;
-    margin: 0;
-    padding: 12px;
-  }
-
-  h2, h3 {
-    text-align: center;
-    margin: 0 0 16px;
-    padding: 0;
-    color: #a02525;
-  }
+  body { font-family: Arial, sans-serif; background: #564100; margin: 0; padding: 12px; }
+  h2, h3 { text-align: center; margin: 0 0 16px; padding: 0; color: #a02525; }
   h3 { margin: 0; font-size: 0.95rem; }
-
-  .box {
-    max-width: 1000px;
-    margin: 0 auto 20px;
-    background: #ffd552;
-    padding: 16px;
-    border-radius: 10px;
-  }
+  .box { max-width: 1000px; margin: 0 auto 20px; background: #ffd552; padding: 16px; border-radius: 10px; }
 
   /* LOGIN */
   #loginBox { max-width: 420px; padding: 24px 20px; }
-  #loginBox input, #loginBox button {
-    display: block;
-    width: 100%;
-    margin: 10px 0 0;
-    padding: 12px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-  }
-  #loginBox button {
-    background: #2563eb;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-  }
+  #loginBox input, #loginBox button { display: block; width: 100%; margin: 10px 0 0; padding: 12px; border-radius: 6px; border: 1px solid #ccc; font-size: 1rem; }
+  #loginBox button { background: #2563eb; color: #fff; border: none; cursor: pointer; }
   #loginBox button:hover { opacity: 0.9; }
 
   /* TOOLBAR */
-  .toolbar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center;
-    margin-bottom: 14px;
-  }
-  .toolbar input {
-    flex: 1 1 180px;
-    min-width: 0;
-    padding: 10px 12px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 0.95rem;
-  }
-  .toolbar button {
-    flex: 0 0 auto;
-    padding: 10px 14px;
-    border-radius: 6px;
-    border: none;
-    background: #2563eb;
-    color: #fff;
-    cursor: pointer;
-    font-size: 0.9rem;
-    white-space: nowrap;
-  }
-  .toolbar button:hover { opacity: 0.9; }
+  .toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 14px; }
+  .toolbar input { flex: 1 1 160px; min-width: 0; padding: 10px 12px; border-radius: 6px; border: 1px solid #ccc; font-size: 0.95rem; }
+  .toolbar button { flex: 0 0 auto; padding: 10px 14px; border-radius: 6px; border: none; background: #2563eb; color: #fff; cursor: pointer; font-size: 0.88rem; white-space: nowrap; }
+  .toolbar button:hover { opacity: 0.88; }
 
   /* CARDS */
-  .cards-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 12px;
-  }
-  .card {
-    flex: 1 1 130px;
-    max-width: 200px;
-    border-radius: 8px;
-    padding: 12px 10px;
-    text-align: center;
-  }
+  .cards-row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 12px; }
+  .card { flex: 1 1 130px; max-width: 200px; border-radius: 8px; padding: 12px 10px; text-align: center; }
   .card.clickable { cursor: pointer; border: 2px solid transparent; }
   .card.clickable:hover { border-color: #2563eb; }
   .card h3 { font-size: 0.8rem; margin-bottom: 6px; }
-  .card p  { margin: 0; font-size: 1.2rem; font-weight: bold; }
+  .card p { margin: 0; font-size: 1.2rem; font-weight: bold; }
 
   /* TABLE */
-  .table-wrap {
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  table {
-    width: 100%;
-    min-width: 600px;
-    border-collapse: collapse;
-    background: #fff;
-    font-size: 0.85rem;
-  }
-  th, td {
-    border: 1px solid #ddd;
-    padding: 8px 10px;
-    text-align: center;
-    white-space: nowrap;
-  }
+  .table-wrap { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table { width: 100%; min-width: 580px; border-collapse: collapse; background: #fff; font-size: 0.85rem; }
+  th, td { border: 1px solid #ddd; padding: 8px 10px; text-align: center; white-space: nowrap; }
   th { background: #f1f5f9; }
-
   #studentTable, #studentHistoryTable { min-width: unset; font-size: 0.9rem; }
   #studentTable th { text-align: left; }
 
-  /* ACTION BUTTONS (History & Delete only) */
-  .actions {
-    display: flex;
-    gap: 4px;
-    justify-content: center;
-  }
-  .innerbutton {
-    padding: 5px 10px;
-    border-radius: 5px;
-    border: none;
-    background: #2563eb;
-    color: #fff;
-    cursor: pointer;
-    font-size: 0.78rem;
-    white-space: nowrap;
-  }
+  /* ACTION BUTTONS */
+  .actions { display: flex; gap: 4px; justify-content: center; }
+  .innerbutton { padding: 5px 10px; border-radius: 5px; border: none; background: #2563eb; color: #fff; cursor: pointer; font-size: 0.78rem; white-space: nowrap; }
   .innerbutton:hover { opacity: 0.85; }
 
-  /* INLINE EDIT EMOJI */
-  .edit-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 0.95rem;
-    padding: 0 0 0 3px;
-    vertical-align: middle;
-    opacity: 0.55;
-  }
+  /* EDIT EMOJI */
+  .edit-btn { background: none; border: none; cursor: pointer; font-size: 0.95rem; padding: 0 0 0 3px; vertical-align: middle; opacity: 0.55; }
   .edit-btn:hover { opacity: 1; }
 
   /* STATUS */
   .paid     { color: green;  font-weight: bold; }
   .unpaid   { color: red;    font-weight: bold; }
   .overpaid { color: orange; font-weight: bold; }
-
-  .hidden { display: none; }
+  .hidden   { display: none; }
 
   @media (max-width: 500px) {
     .card { flex: 1 1 110px; }
@@ -185,33 +80,22 @@
     <input id="searchStudent" placeholder="Search student by name…" oninput="renderTeacher()">
     <button onclick="addStudent()">+ Add Student</button>
     <button onclick="publishAll()">Publish All</button>
+    <button onclick="exportData()" style="background:#16a34a;">⬇ Export Data</button>
+    <button onclick="document.getElementById('importInput').click()" style="background:#7c3aed;">⬆ Import Data</button>
+    <input type="file" id="importInput" accept=".json" style="display:none;" onchange="importData(event)">
   </div>
 
   <div class="cards-row">
-    <div class="card" style="background:#dcfce7;">
-      <h3>Total Paid</h3><p id="totalPaid">₹0</p>
-    </div>
-    <div class="card" style="background:#fee2e2;">
-      <h3>Total Pending</h3><p id="totalPending">₹0</p>
-    </div>
-    <div class="card" style="background:#ffedd5;">
-      <h3>Total Overpaid</h3><p id="totalOverpaid">₹0</p>
-    </div>
+    <div class="card" style="background:#dcfce7;"><h3>Total Paid</h3><p id="totalPaid">₹0</p></div>
+    <div class="card" style="background:#fee2e2;"><h3>Total Pending</h3><p id="totalPending">₹0</p></div>
+    <div class="card" style="background:#ffedd5;"><h3>Total Overpaid</h3><p id="totalOverpaid">₹0</p></div>
   </div>
 
   <div class="cards-row" style="margin-bottom:16px;">
-    <div class="card clickable" style="background:#e2e8f0;" onclick="setFilter('all')">
-      <h3>All Students</h3><p id="totalStudents">0</p>
-    </div>
-    <div class="card clickable" style="background:#bbf7d0;" onclick="setFilter('paid')">
-      <h3>Paid</h3><p id="paidStudents">0</p>
-    </div>
-    <div class="card clickable" style="background:#fecaca;" onclick="setFilter('unpaid')">
-      <h3>Unpaid</h3><p id="unpaidStudents">0</p>
-    </div>
-    <div class="card clickable" style="background:#fed7aa;" onclick="setFilter('overpaid')">
-      <h3>Overpaid</h3><p id="overpaidStudents">0</p>
-    </div>
+    <div class="card clickable" style="background:#e2e8f0;" onclick="setFilter('all')"><h3>All Students</h3><p id="totalStudents">0</p></div>
+    <div class="card clickable" style="background:#bbf7d0;" onclick="setFilter('paid')"><h3>Paid</h3><p id="paidStudents">0</p></div>
+    <div class="card clickable" style="background:#fecaca;" onclick="setFilter('unpaid')"><h3>Unpaid</h3><p id="unpaidStudents">0</p></div>
+    <div class="card clickable" style="background:#fed7aa;" onclick="setFilter('overpaid')"><h3>Overpaid</h3><p id="overpaidStudents">0</p></div>
   </div>
 
   <div class="table-wrap">
@@ -243,15 +127,14 @@ let teacherData = JSON.parse(localStorage.getItem("teacherData")) || { students:
 let loggedStudent = null;
 let currentFilter = "all";
 
+/* ── LOGIN ── */
 function login() {
   const pwd = document.getElementById("password").value;
-
   if (pwd === TEACHER_PASSWORD) {
     hide("loginBox"); show("teacherBox");
     updateFeeCycles(); renderTeacher();
     return;
   }
-
   fetch("students.json?v=" + Date.now())
     .then(r => { if (!r.ok) throw "no-data"; return r.json(); })
     .then(arr => {
@@ -265,41 +148,31 @@ function login() {
     .catch(() => alert("Student data not available. Ask teacher to publish."));
 }
 
+/* ── ADD STUDENT ── */
 function addStudent() {
   const name = prompt("Enter student name:"); if (!name) return;
   const password = prompt("Enter student password:"); if (!password) return;
   const joiningdate = prompt("Enter joining date (YYYY-MM-DD):"); if (!joiningdate) return;
   const monthlyfees = Number(prompt("Enter monthly fees:")); if (isNaN(monthlyfees)) return;
-
-  teacherData.students.push({
-    name, password, joiningdate, monthlyfees,
-    feestobepaid: 0, feespaid: 0, feesremaining: 0,
-    lastFeeCycle: -1, history: []
-  });
-
+  teacherData.students.push({ name, password, joiningdate, monthlyfees, feestobepaid: 0, feespaid: 0, feesremaining: 0, lastFeeCycle: -1, history: [] });
   updateFeeCycles(); save(); renderTeacher();
 }
 
+/* ── RENDER TEACHER TABLE ── */
 function renderTeacher() {
   const search = document.getElementById("searchStudent")?.value.toLowerCase() || "";
-  let totalStudents = 0, totalPaid = 0, totalPending = 0, totalOverpaid = 0;
-  let paidStudents = 0, unpaidStudents = 0, overpaidStudents = 0;
+  let totalStudents=0, totalPaid=0, totalPending=0, totalOverpaid=0, paidStudents=0, unpaidStudents=0, overpaidStudents=0;
 
-  let html = `<tr>
-    <th>Name</th><th>Password</th><th>Joining Date</th>
-    <th>Monthly Fees</th><th>To Be Paid</th><th>Paid</th>
-    <th>Remaining</th><th>Status</th><th>Actions</th>
-  </tr>`;
+  let html = `<tr><th>Name</th><th>Password</th><th>Joining Date</th><th>Monthly Fees</th><th>To Be Paid</th><th>Paid</th><th>Remaining</th><th>Status</th><th>Actions</th></tr>`;
 
   teacherData.students.forEach((s, i) => {
     if (!s.name.toLowerCase().includes(search)) return;
-
     const remaining = s.feestobepaid - s.feespaid;
     const status = remaining > 0 ? "unpaid" : remaining < 0 ? "overpaid" : "paid";
 
     totalStudents++;
     totalPaid += s.feespaid;
-    if (remaining > 0)      { totalPending  += remaining;           unpaidStudents++;  }
+    if (remaining > 0)      { totalPending  += remaining;           unpaidStudents++;   }
     else if (remaining < 0) { totalOverpaid += Math.abs(remaining); overpaidStudents++; }
     else                    { paidStudents++; }
 
@@ -313,7 +186,7 @@ function renderTeacher() {
       <td>₹${s.feestobepaid} <button class="edit-btn" onclick="editfeestobepaid(${i})" title="Edit">✏️</button></td>
       <td>₹${s.feespaid} <button class="edit-btn" onclick="editFees(${i})" title="Edit">✏️</button></td>
       <td>₹${remaining}</td>
-      <td class="${status}">${status.charAt(0).toUpperCase() + status.slice(1)}</td>
+      <td class="${status}">${status.charAt(0).toUpperCase()+status.slice(1)}</td>
       <td>
         <div class="actions">
           <button class="innerbutton" onclick="viewHistory(${i})">History</button>
@@ -324,15 +197,16 @@ function renderTeacher() {
   });
 
   document.getElementById("teacherTable").innerHTML = html;
-  document.getElementById("totalStudents").innerText  = totalStudents;
-  document.getElementById("totalPaid").innerText      = "₹" + totalPaid;
-  document.getElementById("totalPending").innerText   = "₹" + totalPending;
-  document.getElementById("totalOverpaid").innerText  = "₹" + totalOverpaid;
-  document.getElementById("paidStudents").innerText   = paidStudents;
-  document.getElementById("unpaidStudents").innerText = unpaidStudents;
+  document.getElementById("totalStudents").innerText    = totalStudents;
+  document.getElementById("totalPaid").innerText        = "₹" + totalPaid;
+  document.getElementById("totalPending").innerText     = "₹" + totalPending;
+  document.getElementById("totalOverpaid").innerText    = "₹" + totalOverpaid;
+  document.getElementById("paidStudents").innerText     = paidStudents;
+  document.getElementById("unpaidStudents").innerText   = unpaidStudents;
   document.getElementById("overpaidStudents").innerText = overpaidStudents;
 }
 
+/* ── EDIT FUNCTIONS ── */
 function editmonthlyfees(i) {
   const s = teacherData.students[i]; if (!s) return;
   s.history ??= [];
@@ -385,7 +259,7 @@ function viewHistory(i) {
   if (!s.history || s.history.length === 0) { alert("No history available."); return; }
   let h = `History for ${s.name}:\n\n`;
   s.history.forEach((p, j) => {
-    if (p.type === "fee_due")   h += `${j+1}. ${p.date} - ₹${p.amount} - Fees due\n`;
+    if (p.type === "fee_due")      h += `${j+1}. ${p.date} - ₹${p.amount} - Fees due\n`;
     else if (p.type === "payment") h += `${j+1}. ${p.date} - ₹${p.amount} - Payment\n`;
   });
   alert(h);
@@ -398,6 +272,7 @@ function delStudent(i) {
   save(); renderTeacher();
 }
 
+/* ── PUBLISH ── */
 function publishAll() {
   updateFeeCycles();
   const encoded = encodeJSON(JSON.stringify(teacherData.students));
@@ -409,6 +284,43 @@ function publishAll() {
   alert("students.json downloaded — upload or share it.");
 }
 
+/* ── EXPORT DATA (full backup) ── */
+function exportData() {
+  const blob = new Blob([JSON.stringify(teacherData, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "tuition-backup-" + new Date().toISOString().split("T")[0] + ".json";
+  a.click();
+  alert("Backup exported successfully!");
+}
+
+/* ── IMPORT DATA ── */
+function importData(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const imported = JSON.parse(e.target.result);
+      if (!imported.students || !Array.isArray(imported.students)) {
+        alert("Invalid file. Please use a valid tuition backup.");
+        return;
+      }
+      if (!confirm(`Replace all current data with ${imported.students.length} student(s) from backup? This cannot be undone.`)) return;
+      teacherData = imported;
+      save();
+      updateFeeCycles();
+      renderTeacher();
+      alert("Data imported successfully!");
+    } catch {
+      alert("Failed to read file. Make sure it's a valid JSON backup.");
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = "";
+}
+
+/* ── STUDENT DASHBOARD ── */
 function renderStudent() {
   fetch("students.json")
     .then(r => r.json())
@@ -447,6 +359,7 @@ function renderStudent() {
     .catch(() => document.getElementById("studentTable").innerHTML = "<tr><td>No data published yet</td></tr>");
 }
 
+/* ── FEE CYCLES ── */
 function updateFeeCycles() {
   const today = new Date();
   teacherData.students.forEach(s => {
@@ -460,7 +373,6 @@ function updateFeeCycles() {
       (today.getMonth() - joining.getMonth());
     if (today.getDate() < joining.getDate()) monthsPassed--;
     if (monthsPassed < 0) return;
-
     if (monthsPassed > s.lastFeeCycle) {
       for (let m = s.lastFeeCycle + 1; m <= monthsPassed; m++) {
         const cycleDate = new Date(joining);
@@ -469,21 +381,18 @@ function updateFeeCycles() {
         s.feespaid = 0;
         s.feestobepaid = overdue + s.monthlyfees;
         s.feesremaining = s.feestobepaid;
-        s.history.push({
-          date: cycleDate.toISOString().split("T")[0],
-          type: "fee_due",
-          amount: s.feestobepaid
-        });
+        s.history.push({ date: cycleDate.toISOString().split("T")[0], type: "fee_due", amount: s.feestobepaid });
       }
       s.lastFeeCycle = monthsPassed;
     }
   });
 }
 
-function save() { localStorage.setItem("teacherData", JSON.stringify(teacherData)); }
-function hide(id) { document.getElementById(id).classList.add("hidden"); }
-function show(id) { document.getElementById(id).classList.remove("hidden"); }
-function setFilter(f) { currentFilter = f; renderTeacher(); }
+/* ── HELPERS ── */
+function save()     { localStorage.setItem("teacherData", JSON.stringify(teacherData)); }
+function hide(id)   { document.getElementById(id).classList.add("hidden"); }
+function show(id)   { document.getElementById(id).classList.remove("hidden"); }
+function setFilter(f){ currentFilter = f; renderTeacher(); }
 </script>
 </body>
 </html>
