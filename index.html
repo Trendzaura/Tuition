@@ -243,21 +243,42 @@ function editmonthlyfees(i) {
   save(); renderTeacher();
 }
 
+
 function editfeestobepaid(i) {
-  var s = teacherData.students[i]; if (!s) return;
-  if (!s.history) s.history = [];
-  var add = prompt("Fees to be paid by " + s.name + " (monthly: ₹" + s.monthlyfees + ")");
-  if (add === null) return;
-  add = Number(add);
-  if (isNaN(add)) { alert("Enter valid amount"); return; }
-  for (var j = s.history.length - 1; j >= 0; j--) {
-    if (s.history[j].type === "fee_due") { s.history.splice(j, 1); break; }
-  }
-  s.feestobepaid = add;
-  var date = prompt("Date (YYYY-MM-DD):", new Date().toISOString().split("T")[0]);
-  if (!date) return;
-  s.history.push({ date: date, type: "fee_due", amount: add });
-  save(); renderTeacher();
+    var s = teacherData.students[i];
+    if (!s) return;
+
+    var historyIndex = -1;
+
+    for (var j = s.history.length - 1; j >= 0; j--) {
+        if (s.history[j].type === "fee_due") {
+            historyIndex = j;
+            break;
+        }
+    }
+
+    if (historyIndex === -1) {
+        alert("No fee record found.");
+        return;
+    }
+
+    var oldAmount = s.history[historyIndex].amount;
+
+    var newAmount = Number(
+        prompt(
+            "New fee amount:",
+            oldAmount
+        )
+    );
+
+    if (isNaN(newAmount)) return;
+
+    s.feestobepaid = s.feestobepaid - oldAmount + newAmount;
+
+    s.history[historyIndex].amount = newAmount;
+
+    save();
+    renderTeacher();
 }
 
 function editFees(i) {
