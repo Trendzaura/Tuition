@@ -285,6 +285,10 @@ function editfeestobepaid(i) {
 
       s.feestobepaid = s.feestobepaid - oldAmount + add;
 
+      s.history.sort(function(a, b) {
+  return new Date(a.date) - new Date(b.date);
+});
+
       save();
       renderTeacher();
 
