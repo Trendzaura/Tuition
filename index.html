@@ -263,7 +263,9 @@ function editmonthlyfees(i) {
   }
 
   s.monthlyfees = add;
-
+  s.history.sort(function(a, b) {
+  return new Date(a.date) - new Date(b.date);
+});
   save();
   renderTeacher();
 }
@@ -352,6 +354,9 @@ function editFees(i) {
   var date = prompt("Payment date (YYYY-MM-DD):", new Date().toISOString().split("T")[0]);
   if (!date) return;
   s.history.push({ date: date, type: "payment", amount: add });
+  s.history.sort(function(a, b) {
+  return new Date(a.date) - new Date(b.date);
+});
   save(); renderTeacher();
 }
 
