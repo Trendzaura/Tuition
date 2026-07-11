@@ -342,24 +342,60 @@ function editfeestobepaid(i) {
 }
 
 function editFees(i) {
-  var s = teacherData.students[i]; if (!s) return;
+  var s = teacherData.students[i];
+  if (!s) return;
+
   if (!s.history) s.history = [];
+
   var remaining = s.feestobepaid - s.feespaid;
-  var add = prompt("Amount paid by " + s.name + " (remaining: ₹" + remaining + ")");
+
+  var add = prompt(
+    "Amount paid by " + s.name +
+    " (remaining: ₹" + remaining + ")"
+  );
+
   if (add === null) return;
+
   add = Number(add);
-  if (isNaN(add)) { alert("Enter valid amount"); return; }
+
+  if (isNaN(add)) {
+    alert("Enter valid amount");
+    return;
+  }
+
+  var date = prompt(
+    "Payment date (YYYY-MM-DD):",
+    new Date().toISOString().split("T")[0]
+  );
+
+  if (!date) return;
+
+  var ok = confirm(
+    "Confirm payment?\n\n" +
+    "Student: " + s.name + "\n" +
+    "Amount: ₹" + add + "\n" +
+    "Date: " + date
+  );
+
+  if (!ok) return;
+
   s.feespaid += add;
   s.feesremaining = s.feestobepaid - s.feespaid;
-  var date = prompt("Payment date (YYYY-MM-DD):", new Date().toISOString().split("T")[0]);
-  if (!date) return;
-  s.history.push({ date: date, type: "payment", amount: add });
-  s.history.sort(function(a, b) {
-  return new Date(a.date) - new Date(b.date);
-});
-  save(); renderTeacher();
-}
 
+  s.history.push({
+    date: date,
+    type: "payment",
+    amount: add
+  });
+
+  s.history.sort(function(a, b) {
+    return new Date(a.date) - new Date(b.date);
+  });
+
+  save();
+  renderTeacher();
+}
+ 
 function viewHistory(i) {
   var s = teacherData.students[i];
   if (!s) { alert("Student not found"); return; }
