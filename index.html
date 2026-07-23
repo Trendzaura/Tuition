@@ -310,6 +310,8 @@ function editfeestobepaid(i) {
   return new Date(a.date) - new Date(b.date);
 });
 
+  recalculateStudent(s);
+
   save();
   renderTeacher();
 }
@@ -359,6 +361,8 @@ function editFees(i) {
   s.history.sort(function(a, b) {
     return new Date(a.date) - new Date(b.date);
   });
+
+  recalculateStudent(s);
 
   save();
   renderTeacher();
@@ -461,28 +465,40 @@ function renderStudent() {
 
 function updateFeeCycles() {
   var today = new Date();
+
   for (var idx = 0; idx < teacherData.students.length; idx++) {
     var s = teacherData.students[idx];
+
     if (!s.history) s.history = [];
-    if (s.lastFeeCycle === undefined || s.lastFeeCycle === null) s.lastFeeCycle = -1;
-    if (!s.feestobepaid) s.feestobepaid = 0;
-    if (!s.feespaid) s.feespaid = 0;
+    if (s.lastFeeCycle === undefined || s.lastFeeCycle === null)
+      s.lastFeeCycle = -1;
+
     var joining = new Date(s.joiningdate);
-    var monthsPassed = (today.getFullYear() - joining.getFullYear()) * 12 + (today.getMonth() - joining.getMonth());
+
+    var monthsPassed =
+      (today.getFullYear() - joining.getFullYear()) * 12 +
+      (today.getMonth() - joining.getMonth());
+
     if (today.getDate() < joining.getDate()) monthsPassed--;
+
     if (monthsPassed < 0) continue;
+
     if (monthsPassed > s.lastFeeCycle) {
       for (var m = s.lastFeeCycle + 1; m <= monthsPassed; m++) {
         var cycleDate = new Date(joining);
         cycleDate.setMonth(joining.getMonth() + m);
-        var overdue = s.feestobepaid - s.feespaid;
-        s.feespaid = 0;
-        s.feestobepaid = overdue + s.monthlyfees;
-        s.feesremaining = s.feestobepaid;
-        s.history.push({ date: cycleDate.toISOString().split("T")[0], type: "fee_due", amount: s.monthlyfees });
+
+        s.history.push({
+          date: cycleDate.toISOString().split("T")[0],
+          type: "fee_due",
+          amount: s.monthlyfees
+        });
       }
+
       s.lastFeeCycle = monthsPassed;
     }
+
+    recalculateStudent(s);
   }
 }
 
