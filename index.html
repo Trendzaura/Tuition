@@ -300,8 +300,6 @@ function editfeestobepaid(i) {
  
   // If no previous fee_due entry exists
 
-  s.feestobepaid += add;
-
   s.history.push({
     date: date,
     type: "fee_due",
@@ -321,8 +319,6 @@ function editFees(i) {
   if (!s) return;
 
   if (!s.history) s.history = [];
-
-  var remaining = s.feestobepaid - s.feespaid;
 
   var add = prompt(
     "Amount paid by " + s.name +
@@ -353,9 +349,6 @@ function editFees(i) {
   );
 
   if (!ok) return;
-
-  s.feespaid += add;
-  s.feesremaining = s.feestobepaid - s.feespaid;
 
   s.history.push({
     date: date,
@@ -491,6 +484,27 @@ function updateFeeCycles() {
       s.lastFeeCycle = monthsPassed;
     }
   }
+}
+
+function recalculateStudent(s) {
+  var today = new Date().toISOString().split("T")[0];
+
+  s.feestobepaid = 0;
+  s.feespaid = 0;
+
+  for (var i = 0; i < s.history.length; i++) {
+    var h = s.history[i];
+
+    if (h.type === "fee_due" && h.date <= today) {
+      s.feestobepaid += h.amount;
+    }
+
+    if (h.type === "payment") {
+      s.feespaid += h.amount;
+    }
+  }
+
+  s.feesremaining = s.feestobepaid - s.feespaid;
 }
 
 function save()       { localStorage.setItem("teacherData", JSON.stringify(teacherData)); }
