@@ -297,32 +297,7 @@ function editfeestobepaid(i) {
   );
 
   if (!date) return;
-
-  for (var j = s.history.length - 1; j >= 0; j--) {
-    if (
-    s.history[j].type === "fee_due" &&
-    s.history[j].date === date
-) {
-
-      var oldAmount = s.history[j].amount;
-
-      s.history[j].amount = add;
-
-      s.history[j].date = date;
-
-      s.feestobepaid = s.feestobepaid - oldAmount + add;
-
-      s.history.sort(function(a, b) {
-  return new Date(a.date) - new Date(b.date);
-});
-
-      save();
-      renderTeacher();
-
-      return;
-    }
-  }
-
+ 
   // If no previous fee_due entry exists
 
   s.feestobepaid += add;
