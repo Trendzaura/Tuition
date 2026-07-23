@@ -510,13 +510,14 @@ function recalculateStudent(s) {
 
   for (var i = 0; i < s.history.length; i++) {
     var h = s.history[i];
+    var amt = Number(h.amount);
 
     if (h.type === "fee_due" && h.date <= today) {
-      s.feestobepaid += h.amount;
+      s.feestobepaid += amt;
     }
 
     if (h.type === "payment") {
-      s.feespaid += h.amount;
+      s.feespaid += amt;
     }
   }
 
